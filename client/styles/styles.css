@@ -1,0 +1,59 @@
+body {
+  background-color: powderblue;
+}
+
+ul {
+  font-size: 5vmin;
+  color: grey;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+a {
+  color: powderblue;
+  filter: drop-shadow(0.6vmin 0.6vmin 0.6vmin rgba(0, 0, 0, 0.2));
+  transition-duration: 0.4s;
+}
+
+a:hover {
+  filter: drop-shadow(1vmin 1vmin 1vmin rgba(0, 0, 0, 0.2));
+  transform: scale(1.05);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.square {
+  align-items: center;
+  background-color: #FFF;
+  box-shadow: 0.6vmin 0.6vmin 0.6vmin 0.6vmin rgba(0, 0, 0, 0.2);
+  color: #000;
+  display:flex;
+  flex-direction: column;
+  font-family: 'Bungee Hairline', cursive;
+  height: 60vmin;
+  padding: 10vmin;
+  justify-content: space-between;
+  width: 60vmin;
+  transition-duration: 0.4s
+}
+
+.row {
+  align-items: center; 
+  display: flex;
+  font-size: 4vmin;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.title {
+  font-size: 8vmin;
+  margin: 0;
+}
