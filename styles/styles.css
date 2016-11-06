@@ -22,26 +22,39 @@ a:hover {
 }
 
 .container {
+  -webkit-align-items: center;
   align-items: center;
+  display: -webkit-flex;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
+  -webkit-justify-content: center;
   justify-content: center;
-  width: 100vw;
+ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .square {
+  -webkit-align-items: center;
   align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  
   background-color: #FFF;
   box-shadow: 0.6vmin 0.6vmin 0.6vmin 0.6vmin rgba(0, 0, 0, 0.2);
   color: #000;
-  display:flex;
-  flex-direction: column;
   font-family: 'Bungee Hairline', cursive;
   font-weight: 600;
   height: 60vmin;
   padding: 10vmin;
-  justify-content: space-between;
   width: 60vmin;
   transition-duration: 0.4s
 }
