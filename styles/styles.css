@@ -51,12 +51,13 @@ a:hover {
   background-color: #FFF;
   box-shadow: 0.6vmin 0.6vmin 0.6vmin 0.6vmin rgba(0, 0, 0, 0.2);
   color: #000;
-  font-family: 'Bungee Hairline', cursive;
-  font-weight: 600;
   height: 60vmin;
   padding: 10vmin;
   width: 60vmin;
-  transition-duration: 0.4s
+  transition-duration: 0.4s;
+  font-family: 'Bungee Hairline', sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .row {

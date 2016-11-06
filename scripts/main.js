@@ -2,6 +2,6 @@ console.log('   ____             __            \r\n  \/ __\/ ___ _  ___ \/ \/_ _
 console.log('run "pong()" to start a game!')
 
 function pong(text) {
-  console.log(text || 'Pong!');
+  console.log(text || 'pong is cureently undergoing maintenance, please check back soon!');
 };
 
