@@ -38,6 +38,7 @@ a:hover {
   display:flex;
   flex-direction: column;
   font-family: 'Bungee Hairline', cursive;
+  font-weight: 600;
   height: 60vmin;
   padding: 10vmin;
   justify-content: space-between;
