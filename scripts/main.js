@@ -368,7 +368,7 @@ function pong() {
       mouseMoveHandler: mouseMoveHandler,
       mouseUpHandler: mouseUpHandler,
       touchStartHandler: touchStartHandler,
-      touchEndHandler: touchStartHandler,
+      touchEndHandler: touchEndHandler,
       touchMoveHandler: touchMoveHandler,
       open: open,
       reset: reset,
@@ -424,7 +424,6 @@ var runOnce = function () {
   function secretKnock(){
     var count = 0;
     return function() {
-      console.log(count);
       count++;
       if (count > 4) {
         pong();
