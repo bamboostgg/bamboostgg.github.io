@@ -164,12 +164,12 @@ function pong() {
       // player paddleMovement [cursor]
       if (state.controls.cursorY && !state.controls.currentKey) {
         var cursorY = state.controls.cursorY;
-        if (cursorY < state.bounds.top) {
-          cursorY = state.bounds.top;
+        if (cursorY < (state.bounds.top + state.paddleRight.height / 2)) {
+          cursorY = state.bounds.top + state.paddleRight.height / 2;
         } else if (cursorY > state.bounds.bottom - state.paddleRight.height) {
-          cursorY = state.bounds.bottom - state.paddleRight.height;
+          cursorY = state.bounds.bottom - state.paddleRight.height / 2;
         }
-        state.paddleRight.y = cursorY;
+        state.paddleRight.y = cursorY - state.paddleRight.height / 2;
       }
 
 
@@ -277,12 +277,6 @@ function pong() {
       ctx.fillText(
         state.score.right,
         canvas.width / 2 + 36,
-        60
-      );
-
-      ctx.fillText(
-        state.controls.cursorY,
-        canvas.width - 128,
         60
       );
 
