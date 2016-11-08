@@ -352,6 +352,20 @@ function pong() {
       }
     };
 
+    function touchStartHandler(event) {
+      state.controls.cursorY = event.touches.item(0).clientY;
+    };
+
+    function touchEndHandler(event) {
+      state.controls.cursorY = null;
+    };
+
+    function touchMoveHandler(event) {
+      if (state.controls.cursorY) {
+        state.controls.cursorY = event.touches.item(0).clientY;
+      }
+    };
+
     return {
       close: close,
       keyDownHandler: keyDownHandler,
@@ -359,6 +373,9 @@ function pong() {
       mouseDownHandler: mouseDownHandler,
       mouseMoveHandler: mouseMoveHandler,
       mouseUpHandler: mouseUpHandler,
+      touchStartHandler: touchStartHandler,
+      touchEndHandler: touchStartHandler,
+      touchMoveHandler: touchMoveHandler,
       open: open,
       reset: reset,
       resize: resize,
@@ -391,9 +408,9 @@ function pong() {
     document.body.addEventListener('mousedown', game.mouseDownHandler);
     document.body.addEventListener('mousemove', game.mouseMoveHandler);
     document.body.addEventListener('mouseup', game.mouseUpHandler);
-    document.body.addEventListener('touchstart', game.mouseDownHandler);
-    document.body.addEventListener('touchmove', game.mouseMoveHandler);
-    document.body.addEventListener('touchend', game.mouseUpHandler);
+    document.body.addEventListener('touchstart', game.touchStartHandler);
+    document.body.addEventListener('touchmove', game.touchMoveHandler);
+    document.body.addEventListener('touchend', game.touchEndHandler);
     notCalled = false;
   }
   square.close();
