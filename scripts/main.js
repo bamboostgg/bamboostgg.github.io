@@ -280,12 +280,18 @@ function pong() {
         60
       );
 
+      ctx.fillText(
+        state.controls.cursorY,
+        canvas.width - 128,
+        60
+      );
+
       // bounds
       ctx.beginPath();
       ctx.moveTo(0           , state.bounds.top);
       ctx.lineTo(canvas.width, state.bounds.top);
       ctx.moveTo(canvas.width, state.bounds.bottom);
-      ctx.lineTo(0             , state.bounds.bottom);
+      ctx.lineTo(0           , state.bounds.bottom);
       ctx.stroke();
 
       // ball
@@ -318,10 +324,10 @@ function pong() {
           togglePause();
           return;
         case 'ArrowDown':
-          state.currentKey = event.key;
+          state.controls.currentKey = event.key;
           return;
         case 'ArrowUp':
-          state.currentKey = event.key;
+          state.controls.currentKey = event.key;
           return;
         default:
           return;
@@ -329,7 +335,7 @@ function pong() {
     };
 
     function keyUpHandler(event) {
-      state.currentKey = null;
+      state.controls.currentKey = null;
     };
 
     function mouseDownHandler(event) {
