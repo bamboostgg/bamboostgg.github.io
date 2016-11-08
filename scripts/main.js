@@ -391,6 +391,9 @@ function pong() {
     document.body.addEventListener('mousedown', game.mouseDownHandler);
     document.body.addEventListener('mousemove', game.mouseMoveHandler);
     document.body.addEventListener('mouseup', game.mouseUpHandler);
+    document.body.addEventListener('touchstart', game.mouseDownHandler);
+    document.body.addEventListener('touchmove', game.mouseMoveHandler);
+    document.body.addEventListener('touchend', game.mouseUpHandler);
     notCalled = false;
   }
   square.close();
@@ -418,5 +421,5 @@ var runOnce = function () {
       };
     }
   }
-  document.getElementsByClassName('square').item(0).addEventListener('click', secretKnock());
+  document.getElementsByClassName('title').item(0).addEventListener('click', secretKnock());
 }();
