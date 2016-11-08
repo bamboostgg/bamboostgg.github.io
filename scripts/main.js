@@ -1,9 +1,8 @@
-function pong(text) {
-
+function pong() {
+  var notCalled = true;
   var square = function() {
-    var classes = document.getElementsByClassName('square')
-      .item(0)
-      .classList;
+    var elem = document.getElementsByClassName('square').item(0)
+    var classes = elem.classList;
     return {
       open: function() {
         classes.contains('shrink')
@@ -47,7 +46,10 @@ function pong(text) {
           x: 10,
           y: 10,
         },
-        currentKey: null,
+        controls: {
+          currentKey: null,
+          cursorY: null,
+        },
         bounds: {
           top: null,
           bottom: null,
@@ -78,7 +80,13 @@ function pong(text) {
       if (!state.open || state.paused) {
         return;
       }
-      resize();
+      var ctx = canvas.getContext('2d');
+      if (
+        canvas.height !== ctx.canvas.clientHeight ||
+        canvas.width  !== ctx.canvas.clientWidth
+      ) {
+        resize();
+      }
       update();
       render();
       window.requestAnimationFrame(animate);
@@ -87,10 +95,12 @@ function pong(text) {
     function close() {
       reset();
       state.open = false;
+      canvas.height = 100;  
     };
 
     function open() {
       if (!state.open) {
+        resize();
         reset();
         start();
       }
@@ -122,37 +132,46 @@ function pong(text) {
 
     function resize() {
       var ctx = canvas.getContext('2d');
-      if (
-        canvas.height !== ctx.canvas.clientHeight ||
-        canvas.width  !== ctx.canvas.clientWidth
-      ) {
-        canvas.height = ctx.canvas.clientHeight;  
-        canvas.width  = ctx.canvas.clientWidth;
-        reset();
-      };
-    }
+      canvas.height = ctx.canvas.clientHeight;  
+      canvas.width  = ctx.canvas.clientWidth;
+      reset();
+    };
 
     function update() {
       var nextX = state.ball.x + state.ball.vx;
       var nextY = state.ball.y + state.ball.vy;
 
-      // player paddleMovement
-      switch (state.currentKey) {
-        case 'ArrowUp':
-          state.paddleRight.y -=
-            state.paddleRight.y - 5 < state.bounds.top ?
-              state.paddleRight.y - state.bounds.top :
-              5;
-          break;
-        case 'ArrowDown':
-          state.paddleRight.y += 
-            state.paddleRight.y + state.paddleRight.height + 5 > state.bounds.bottom ?
-              state.paddleRight.y + state.paddleRight.height - state.bounds.bottom :
-              5;
-          break;
-        default:
-          break;
+      // player paddleMovement [keyboard]
+      if (state.controls.currentKey) {
+        switch (state.controls.currentKey) {
+          case 'ArrowUp':
+            state.paddleRight.y -=
+              state.paddleRight.y - 5 < state.bounds.top ?
+                state.paddleRight.y - state.bounds.top :
+                5;
+            break;
+          case 'ArrowDown':
+            state.paddleRight.y += 
+              state.paddleRight.y + state.paddleRight.height + 5 > state.bounds.bottom ?
+                state.paddleRight.y + state.paddleRight.height - state.bounds.bottom :
+                5;
+            break;
+          default:
+            break;
+        };        
       }
+
+      // player paddleMovement [cursor]
+      if (state.controls.cursorY && !state.controls.currentKey) {
+        var cursorY = state.controls.cursorY;
+        if (cursorY < state.bounds.top) {
+          cursorY = state.bounds.top;
+        } else if (cursorY > state.bounds.bottom - state.paddleRight.height) {
+          cursorY = state.bounds.bottom - state.paddleRight.height;
+        }
+        state.paddleRight.y = cursorY;
+      }
+
 
       // left paddleMovement
       if ((state.paddleLeft.y + state.paddleLeft.height / 2 - nextY ) > 0) {
@@ -191,7 +210,7 @@ function pong(text) {
         state.score.right += 1;
         if (state.score.right > 9) {
           state.paused = true;
-          state.winner = 'Player 2';
+          state.winner = 'You';
           return;
         }
         state.ball.y = canvas.height / 2 - state.ball.height / 2;
@@ -215,7 +234,7 @@ function pong(text) {
         state.score.left += 1;
         if (state.score.left > 9) {
           state.paused = true;
-          state.winner = 'Player 1';
+          state.winner = 'I';
           return;
         }
         state.ball.y = canvas.height / 2 - state.ball.height / 2;
@@ -241,8 +260,8 @@ function pong(text) {
 
       if (state.winner) {
         ctx.fillText(
-          state.winner + ' wins!',
-          canvas.width  / 2 - 24 * 6,
+          state.winner + ' win!',
+          canvas.width  / 2 - 24 * (state.winner.length + 4) / 2,
           canvas.height / 2 
         );
         setTimeout(function(){ close(); canvas.close(); square.open(); }, 1200);
@@ -266,7 +285,7 @@ function pong(text) {
       ctx.moveTo(0           , state.bounds.top);
       ctx.lineTo(canvas.width, state.bounds.top);
       ctx.moveTo(canvas.width, state.bounds.bottom);
-      ctx.lineTo(0           , state.bounds.bottom);
+      ctx.lineTo(0             , state.bounds.bottom);
       ctx.stroke();
 
       // ball
@@ -307,23 +326,39 @@ function pong(text) {
         default:
           return;
       }
-    }
+    };
 
     function keyUpHandler(event) {
       state.currentKey = null;
-    }
+    };
+
+    function mouseDownHandler(event) {
+      state.controls.cursorY = event.clientY;
+    };
+
+    function mouseUpHandler(event) {
+      state.controls.cursorY = null;
+    };
+
+    function mouseMoveHandler(event) {
+      if (state.controls.cursorY) {
+        state.controls.cursorY = event.clientY;
+      }
+    };
 
     return {
       close: close,
       keyDownHandler: keyDownHandler,
       keyUpHandler: keyUpHandler,
+      mouseDownHandler: mouseDownHandler,
+      mouseMoveHandler: mouseMoveHandler,
+      mouseUpHandler: mouseUpHandler,
       open: open,
       reset: reset,
       resize: resize,
       render: render,
       start: start,
     };
-
   }(canvas);
 
   var openCloseListener = function(event) {
@@ -342,19 +377,23 @@ function pong(text) {
         return;
     }
   };
-
   
-  var init = function() {
-    square.close();
-    canvas.open();
+  if (notCalled) {
     document.body.addEventListener('keypress', openCloseListener);
     document.body.addEventListener('keydown', game.keyDownHandler);
     document.body.addEventListener('keyup', game.keyUpHandler);
-    game.resize();
-    game.render();
-    setTimeout(game.start, 1000);
-  }();
-  return 'press "q" to quit and enter to open again'
+    document.body.addEventListener('mousedown', game.mouseDownHandler);
+    document.body.addEventListener('mousemove', game.mouseMoveHandler);
+    document.body.addEventListener('mouseup', game.mouseUpHandler);
+    notCalled = false;
+  }
+  square.close();
+  canvas.open();
+  game.resize();
+  game.render();
+  setTimeout(game.start, 1000);
+
+  console.log('use the arrow keys to move up and down!\npress "q" to quit, space to toggle pause, and enter to reopen')
 };
 
 var runOnce = function () {
@@ -362,4 +401,16 @@ var runOnce = function () {
     '   ____             __ \r\n  \/ __\/ ___ _  ___ \/ \/_ ___   ____\r\n \/ _\/  \/ _ `\/ (_-<\/ __\/\/ -_) \/ __\/\r\n\/___\/__\\_,_\/ \/___\/\\__\/ \\__\/ \/_\/   \r\n  \/ __\/  ___ _  ___ _  \/ \/        \r\n \/ _\/   \/ _ `\/ \/ _ `\/ \/_\/         \r\n\/___\/   \\_, \/  \\_, \/ (_)          \r\n       \/___\/  \/___\/               \n',
     'run "pong()" to start a game!'
   );
+  function secretKnock(){
+    var count = 0;
+    return function() {
+      console.log(count);
+      count++;
+      if (count > 4) {
+        pong();
+        count = 0;
+      };
+    }
+  }
+  document.getElementsByClassName('square').item(0).addEventListener('click', secretKnock());
 }();
