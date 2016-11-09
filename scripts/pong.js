@@ -34,6 +34,23 @@ function pong() {
     return elem;
   }();
 
+  var exit = function() {
+    var elem = document.getElementById('exit');
+    var classes = elem.classList;
+    elem.open = function() {
+      if (classes.contains('hidden')) {
+        classes.remove('hidden');
+      }
+    };
+    elem.close = function() {
+      if (!classes.contains('hidden')) {
+        classes.add('hidden');
+      }
+    };
+    
+    return elem;
+  }();
+
 
   var game = function(canvas) {
     function startState() {
@@ -57,6 +74,15 @@ function pong() {
         open: true,
         paused: false,
         paddleLeft: {
+          name: [
+            'Angalar',
+            'Pork Bun',
+            'Joyce',
+            'Kerrick',
+            'Mr.Bonk',
+            'A Panini',
+            'Paddy',
+          ][(Math.random() * 6) | 0],
           height: 50,
           width: 10,
           y: null,
@@ -80,7 +106,6 @@ function pong() {
       if (!state.open || state.paused) {
         return;
       }
-      var ctx = canvas.getContext('2d');
 
       update();
       render();
@@ -125,8 +150,7 @@ function pong() {
       state.ball.x        = canvas.width  / 2 - state.ball.width         / 2;
     };
 
-    function resize() {
-      console.log('resize');
+    function resize() { 
       var ctx = canvas.getContext('2d');
       canvas.height = ctx.canvas.clientHeight;  
       canvas.width  = ctx.canvas.clientWidth;
@@ -162,7 +186,7 @@ function pong() {
         var cursorY = state.controls.cursorY;
         if (cursorY < (state.bounds.top + state.paddleRight.height / 2)) {
           cursorY = state.bounds.top + state.paddleRight.height / 2;
-        } else if (cursorY > state.bounds.bottom - state.paddleRight.height) {
+        } else if (cursorY > state.bounds.bottom - state.paddleRight.height / 2) {
           cursorY = state.bounds.bottom - state.paddleRight.height / 2;
         }
         state.paddleRight.y = cursorY - state.paddleRight.height / 2;
@@ -204,7 +228,7 @@ function pong() {
         }
         // score
         state.score.right += 1;
-        if (state.score.right > 9) {
+        if (state.score.right > 2) {
           state.paused = true;
           state.winner = 'You';
           return;
@@ -228,9 +252,9 @@ function pong() {
         }
         // score
         state.score.left += 1;
-        if (state.score.left > 9) {
+        if (state.score.left > 2) {
           state.paused = true;
-          state.winner = 'I';
+          state.winner = "Me";
           return;
         }
         state.ball.y = canvas.height / 2 - state.ball.height / 2;
@@ -254,13 +278,14 @@ function pong() {
       ctx.strokeStyle = 'white';
       ctx.lineWidth   = '4';
 
+      // win state
       if (state.winner) {
         ctx.fillText(
-          state.winner + ' win!',
-          canvas.width  / 2 - 24 * (state.winner.length + 4) / 2,
+          state.winner === 'You' ? 'You Win!' : 'You Lose' ,
+          canvas.width  / 2 - 24 * (8) / 2,
           canvas.height / 2 
         );
-        setTimeout(function(){ close(); canvas.close(); square.open(); }, 1200);
+        setTimeout(closeAll, 1200);
         return;
       }
 
@@ -268,12 +293,23 @@ function pong() {
       ctx.fillText(
         state.score.left,
         canvas.width / 2 - 60,
-        60
+        state.bounds.top - 10
       );
       ctx.fillText(
         state.score.right,
         canvas.width / 2 + 36,
-        60
+        state.bounds.top - 10
+      );
+      ctx.font = "24px arial";
+      ctx.fillText(
+        state.paddleLeft.name,
+        canvas.width / 2 - (6 + state.paddleLeft.name.length * 12) ,
+        state.bounds.top - 58
+      );
+      ctx.fillText(
+        'You',
+        canvas.width / 2 + 30,
+        state.bounds.top - 58
       );
 
       // bounds
@@ -374,17 +410,28 @@ function pong() {
     };
   }(canvas);
 
+  var closeAll = function() {
+    square.open();
+    canvas.close();
+    exit.close();
+    game.close();
+  }
+  var openAll = function() {
+    square.close();
+    canvas.open();
+    exit.open();
+    game.resize();
+    game.render();
+    setTimeout(game.start, 1000);
+  }
+
   var openCloseListener = function(event) {
     switch(event.key) {
       case 'q':
-        square.open();
-        canvas.close();
-        game.close();
+        closeAll();
         return;
       case 'Enter':
-        square.close();
-        canvas.open();
-        game.open();
+        openAll();
         return;
       default:
         return;
@@ -401,14 +448,11 @@ function pong() {
     document.body.addEventListener('touchstart', game.touchStartHandler);
     document.body.addEventListener('touchmove', game.touchMoveHandler);
     document.body.addEventListener('touchend', game.touchEndHandler);
+    document.getElementById('exit').addEventListener('click', closeAll);
     window.addEventListener('resize', game.resize);
     notCalled = false;
   }
-  square.close();
-  canvas.open();
-  game.resize();
-  game.render();
-  setTimeout(game.start, 1000);
+  openAll();
 
   console.log('use the arrow keys to move up and down!\npress "q" to quit, space to toggle pause, and enter to reopen')
 };

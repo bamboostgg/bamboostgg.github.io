@@ -21,6 +21,10 @@ a:hover {
   filter: drop-shadow(1vmin 1vmin 1vmin rgba(0, 0, 0, 0.2));
   transform: scale(1.05);
 }
+a:active { 
+  filter: drop-shadow(0.3vmin 0.3vmin 0.3vmin rgba(0, 0, 0, 0.2));
+  transform: scale(0.95);
+}
 
 .container {
   -webkit-align-items: center;
@@ -77,6 +81,10 @@ a:hover {
   margin:0 !important;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .shrink {
   height: 0%;
   width: 0%;
@@ -91,4 +99,11 @@ a:hover {
 
 #canvas {
   z-index: 1;
+}
+
+#exit {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
