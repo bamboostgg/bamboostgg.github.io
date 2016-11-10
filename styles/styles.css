@@ -47,7 +47,10 @@ a:active {
   width: 70vmin;
   font-family: 'Bungee Hairline', sans-serif;
   font-weight: 600;
-  font-style: normal;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .row {
