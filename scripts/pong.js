@@ -379,14 +379,17 @@ function pong() {
     };
 
     function touchStartHandler(event) {
+      event.preventDefault();
       state.controls.cursorY = event.touches.item(0).clientY;
     };
 
     function touchEndHandler(event) {
+      event.preventDefault();
       state.controls.cursorY = null;
     };
 
     function touchMoveHandler(event) {
+      event.preventDefault();
       if (state.controls.cursorY) {
         state.controls.cursorY = event.touches.item(0).clientY;
       }
