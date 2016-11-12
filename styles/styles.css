@@ -81,8 +81,8 @@ a:active {
   left: 0 !important;
   bottom: 0 !important;
   right: 0 !important;
-  height: 100vh !important;
-  width: 100vw !important;
+  height: 100% !important;
+  width: 100% !important;
   margin:0 !important;
 }
 
