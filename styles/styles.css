@@ -5,7 +5,6 @@ body {
 
 ul {
   font-size: 5vmin;
-  color: lightslategrey;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -15,23 +14,25 @@ ul {
 a {
   color: lightslategrey;
   text-align: center;
+  text-decoration: none;
+  transition-duration: 0.4s;
 }
 
 a div{
   filter: drop-shadow(0.35vmin 0.6vmin 0.6vmin rgba(0, 30, 50, 0.15));
-  transition-duration: 0.4s;
 }
 
-a div:hover {
+a:hover {
   filter: drop-shadow(0.7vmin 1vmin 1vmin rgba(0, 30, 50, 0.15));
   transform: scale(1.05);
 }
-a div:active { 
+a:active { 
   filter: drop-shadow(0.175vmin 0.3vmin 0.3vmin rgba(0, 30, 50, 0.15));
   transform: scale(0.95);
 }
 
 a span {
+  color: lightslategrey;
   font-family: sans-serif;
   font-size: 0.45em;
 }
@@ -50,7 +51,7 @@ a span {
 .square {
   background-color: #FFF;
   box-shadow: 0.35vmin 0.6vmin 3vmin 0.6vmin rgba(0, 30, 50, 0.15);
-  color: #000;
+  color: lightslategrey;
   height: 70vmin;
   padding: 0px;
   width: 70vmin;
@@ -73,6 +74,7 @@ a span {
 }
 
 .title {
+  color: black;
   font-size: 8vmin;
   margin: 0;
 }
@@ -117,6 +119,7 @@ a span {
 }
 
 #exit {
+  color: white;
   z-index: 2;
   position: absolute;
   top: 0;
