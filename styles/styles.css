@@ -15,16 +15,24 @@ ul {
 a {
   color: powderblue;
   filter: drop-shadow(0.35vmin 0.6vmin 0.6vmin rgba(0, 30, 50, 0.15));
+  text-align: center;
   transition-duration: 0.4s;
 }
 
-a:hover {
+a div:hover {
   filter: drop-shadow(0.7vmin 1vmin 1vmin rgba(0, 30, 50, 0.15));
   transform: scale(1.05);
+  transition-duration: 0.4s;
 }
-a:active { 
+a div:active { 
   filter: drop-shadow(0.175vmin 0.3vmin 0.3vmin rgba(0, 30, 50, 0.15));
   transform: scale(0.95);
+  transition-duration: 0.4s;
+}
+
+a span {
+  font-family: sans-serif;
+  font-size: 0.5em;
 }
 
 .container {
