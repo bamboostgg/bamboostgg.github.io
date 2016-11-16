@@ -5,7 +5,7 @@ body {
 
 ul {
   font-size: 5vmin;
-  color: grey;
+  color: lightslategrey;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -13,26 +13,27 @@ ul {
 }
 
 a {
-  color: powderblue;
-  filter: drop-shadow(0.35vmin 0.6vmin 0.6vmin rgba(0, 30, 50, 0.15));
+  color: lightslategrey;
   text-align: center;
+}
+
+a div{
+  filter: drop-shadow(0.35vmin 0.6vmin 0.6vmin rgba(0, 30, 50, 0.15));
   transition-duration: 0.4s;
 }
 
 a div:hover {
   filter: drop-shadow(0.7vmin 1vmin 1vmin rgba(0, 30, 50, 0.15));
   transform: scale(1.05);
-  transition-duration: 0.4s;
 }
 a div:active { 
   filter: drop-shadow(0.175vmin 0.3vmin 0.3vmin rgba(0, 30, 50, 0.15));
   transform: scale(0.95);
-  transition-duration: 0.4s;
 }
 
 a span {
   font-family: sans-serif;
-  font-size: 0.5em;
+  font-size: 0.45em;
 }
 
 .container {
@@ -68,7 +69,7 @@ a span {
   justify-content: space-around;
   transition-duration: 0.4s;
   width: 100%;
-  height: 2em;
+  height: 2.5em;
 }
 
 .title {
