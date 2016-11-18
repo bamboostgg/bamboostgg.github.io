@@ -1,14 +1,6 @@
 body {
   background-color: powderblue;
-  overflow: hidden;
-}
-
-ul {
-  font-size: 5vmin;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
+  /*overflow: hidden;*/
 }
 
 a {
@@ -37,6 +29,40 @@ a span {
   font-size: 0.45em;
 }
 
+h1 {
+  font-family: 'Bungee Hairline', sans-serif;
+  color: black;
+  font-size: 8vmin;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Bungee Hairline', sans-serif;
+  color: black;
+}
+
+h3 {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  transition-duration: 0.4s;
+  margin: 0;
+  width: 100%;
+}
+
+h4 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .container {
   -webkit-align-items: center;
   align-items: center;
@@ -48,36 +74,41 @@ a span {
   flex-direction: column;
 }
 
-.square {
+.content {
   background-color: #FFF;
   box-shadow: 0.35vmin 0.6vmin 3vmin 0.6vmin rgba(0, 30, 50, 0.15);
+}
+
+.square {
   color: lightslategrey;
+  font-family: 'Bungee Hairline', sans-serif;
+  font-weight: 600;
+  font-size: 4vmin;
   height: 70vmin;
   padding: 0px;
   width: 70vmin;
-  font-family: 'Bungee Hairline', sans-serif;
-  font-weight: 600;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
+.square ul {
+  font-size: 5vmin;
+  text-align: center;
+}
+
 .row {
-  align-items: center; 
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
   display: flex;
-  font-size: 4vmin;
+  -webkit-justify-content: space-around;
   justify-content: space-around;
   transition-duration: 0.4s;
   width: 100%;
-  height: 2.5em;
 }
 
-.title {
-  color: black;
-  font-size: 8vmin;
-  margin: 0;
-}
 
 .footer {
   position: absolute;
@@ -102,6 +133,11 @@ a span {
   display: none !important;
 }
 
+.page {
+  background-color: white;
+  padding: 2vmin 4vmin 4vmin;
+}
+
 .shrink {
   height: 0%;
   width: 0%;
@@ -116,6 +152,21 @@ a span {
 
 #canvas {
   z-index: 1;
+}
+#skills h3 {
+  display: inline;
+}
+
+#skills ul {
+  display: inline;
+}
+
+#skills li {
+  display: inline;
+}
+
+#skills li+li:before {
+  content: ", ";
 }
 
 #exit {
