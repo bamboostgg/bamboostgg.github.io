@@ -13,5 +13,5 @@ var runOnce = function () {
       };
     }
   }
-  document.getElementsByClassName('title').item(0).addEventListener('click', secretKnock());
+  document.getElementById('title').addEventListener('click', secretKnock());
 }();
