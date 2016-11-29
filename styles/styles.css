@@ -189,6 +189,11 @@ ul {
   font-size: 10vmin;
 }
 
+.page ul {
+  font-family: 'Open serif', sans-serif;
+  font-size: 0.98em;
+}
+
 .page a {
   color: black;
 }
