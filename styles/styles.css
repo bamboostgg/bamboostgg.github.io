@@ -18,7 +18,6 @@ header ul {
 }
 
 a {
-  color: black;
   text-align: center;
   text-decoration: none;
   transition-duration: 0.4s;
@@ -143,6 +142,10 @@ ul {
   padding: 0px;
 }
 
+.square a {
+  color: darkslategrey;
+}
+
 .row {
   display: -webkit-flex;
   display: flex;
@@ -184,6 +187,10 @@ ul {
 .page h1 {
   color: white;
   font-size: 10vmin;
+}
+
+.page a {
+  color: black;
 }
 
 .shrink {
