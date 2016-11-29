@@ -3,8 +3,22 @@ body {
   /*overflow: hidden;*/
 }
 
+header {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+}
+
+header ul {
+  padding: 0;
+}
+
 a {
-  color: lightslategrey;
+  color: black;
   text-align: center;
   text-decoration: none;
   transition-duration: 0.4s;
@@ -25,42 +39,55 @@ a:active {
 
 a span {
   color: lightslategrey;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.45em;
 }
 
 h1 {
   font-family: 'Bungee Hairline', sans-serif;
-  color: black;
-  font-size: 8vmin;
   margin: 0;
 }
 
 h2 {
   font-family: 'Bungee Hairline', sans-serif;
   color: black;
+  margin-top: 0.83em;
+  margin-bottom: 0.41em;
 }
 
 h3 {
-  -webkit-align-items: center;
-  align-items: center;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  transition-duration: 0.4s;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
   margin: 0;
-  width: 100%;
+}
+
+h3 span {
+  color: darkgrey;
+  font-family: 'Bungee Hairline', sans-serif;
+  font-size:; .9em;
+}
+
+h3 span:before{
+  content:" - ";
 }
 
 h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9em;
   margin: 0;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+p {
   margin: 0;
+}
+
+p i {
+  margin: 0.25em;
+}
+
+ul {
+  margin: 0;
+  padding-left: 2em;
 }
 
 .container {
@@ -70,6 +97,17 @@ ul {
   display: flex;
   -webkit-justify-content: space-around;
   justify-content: space-around;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.subcontainer {
+  display: flex;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
   -webkit-flex-direction: column;
   flex-direction: column;
 }
@@ -93,14 +131,19 @@ ul {
   user-select: none;
 }
 
+.square h1 {
+  font-size: 8vmin;
+  color: black;
+}
+
 .square ul {
   font-size: 5vmin;
   text-align: center;
+  list-style: none;
+  padding: 0px;
 }
 
 .row {
-  -webkit-align-items: center;
-  align-items: center;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-around;
@@ -108,7 +151,6 @@ ul {
   transition-duration: 0.4s;
   width: 100%;
 }
-
 
 .footer {
   position: absolute;
@@ -135,7 +177,13 @@ ul {
 
 .page {
   background-color: white;
-  padding: 2vmin 4vmin 4vmin;
+  width: 850px;
+  height: 1100px;
+}
+
+.page h1 {
+  color: white;
+  font-size: 10vmin;
 }
 
 .shrink {
@@ -150,24 +198,45 @@ ul {
   display: none;
 }
 
+#applications{
+  -webkit-flex: 7 2;
+  flex: 7 2;
+}
+
 #canvas {
   z-index: 1;
 }
-#skills h3 {
-  display: inline;
+
+#contact {
+  background-color: darkslategrey;
+  color: white;
+  padding-bottom: 8px ;
+}
+#contact ul {
+  list-style: none;
 }
 
-#skills ul {
-  display: inline;
+#contact a {
+  color: white;
 }
 
-#skills li {
-  display: inline;
+#education ul {
+  list-style: none;
+  padding: 0;
 }
 
-#skills li+li:before {
-  content: ", ";
+#education li {
+  margin-bottom: 12px;
 }
+
+#education p {
+  margin: 0;
+}
+
+#experience { 
+  -webkit-flex: 4 3;
+  flex: 4 3;
+} 
 
 #exit {
   color: white;
@@ -175,4 +244,44 @@ ul {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+#sidebar {
+  -webkit-flex: 3 1 ;
+  flex: 3 1;
+  padding: 0px 16px 16px 16px;
+  background-color: cadetblue;
+  color: white;
+}
+
+#resume-body {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+#resume-main {
+  -webkit-flex: 11 11 300px;
+  flex: 11 11 300px;
+  padding: 0px 16px 24px;
+}
+
+#resume-main h2 {
+  text-align: center;
+}
+
+@media print {
+  html > .container {
+    -webkit-align-items: none;
+    align-items: none;
+    -webkit-justify-content: none;
+    justify-content: none;
+    -webkit-flex-direction: none;
+    flex-direction: none;
+    display: block;
+    margin: 0px;
+  }
+
+  #exit {
+    display: none;
+  }
 }
