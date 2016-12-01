@@ -51,6 +51,19 @@ function pong() {
     return elem;
   }();
 
+  var body = function() {
+    return {
+      open:  function() {
+        console.log('cubes')
+        document.body.className = "container fullscreen background-cubes";
+      },
+      close: function() {
+        console.log('no cubes')
+        document.body.className = "container fullscreen";
+      },
+    };
+  }();
+
 
   var game = function(canvas) {
     function startState() {
@@ -414,17 +427,41 @@ function pong() {
   }(canvas);
 
   var closeAll = function() {
+    body.open();
     square.open();
     canvas.close();
     exit.close();
     game.close();
+
+    document.body.removeEventListener('keypress', openCloseListener);
+    document.body.removeEventListener('keydown', game.keyDownHandler);
+    document.body.removeEventListener('keyup', game.keyUpHandler);
+    document.body.removeEventListener('mousedown', game.mouseDownHandler);
+    document.body.removeEventListener('mousemove', game.mouseMoveHandler);
+    document.body.removeEventListener('mouseup', game.mouseUpHandler);
+    document.body.removeEventListener('touchstart', game.touchStartHandler);
+    document.body.removeEventListener('touchmove', game.touchMoveHandler);
+    document.body.removeEventListener('touchend', game.touchEndHandler);
   }
   var openAll = function() {
+
+    body.close()
     square.close();
     canvas.open();
     exit.open();
     game.resize();
     game.render();
+
+    document.body.addEventListener('keypress', openCloseListener);
+    document.body.addEventListener('keydown', game.keyDownHandler);
+    document.body.addEventListener('keyup', game.keyUpHandler);
+    document.body.addEventListener('mousedown', game.mouseDownHandler);
+    document.body.addEventListener('mousemove', game.mouseMoveHandler);
+    document.body.addEventListener('mouseup', game.mouseUpHandler);
+    document.body.addEventListener('touchstart', game.touchStartHandler);
+    document.body.addEventListener('touchmove', game.touchMoveHandler);
+    document.body.addEventListener('touchend', game.touchEndHandler);
+
     setTimeout(game.start, 1000);
   }
 
@@ -442,16 +479,8 @@ function pong() {
   };
   
   if (notCalled) {
-    document.body.addEventListener('keypress', openCloseListener);
-    document.body.addEventListener('keydown', game.keyDownHandler);
-    document.body.addEventListener('keyup', game.keyUpHandler);
-    document.body.addEventListener('mousedown', game.mouseDownHandler);
-    document.body.addEventListener('mousemove', game.mouseMoveHandler);
-    document.body.addEventListener('mouseup', game.mouseUpHandler);
-    document.body.addEventListener('touchstart', game.touchStartHandler);
-    document.body.addEventListener('touchmove', game.touchMoveHandler);
-    document.body.addEventListener('touchend', game.touchEndHandler);
     document.getElementById('exit').addEventListener('click', closeAll);
+    document.getElementById('exit').addEventListener('touchstart', closeAll);
     window.addEventListener('resize', game.resize);
     notCalled = false;
   }
