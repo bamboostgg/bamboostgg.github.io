@@ -24,10 +24,16 @@ function init() {
   }
 
   document.getElementById('title').addEventListener('click', secretKnock());
-  document.getElementById('labels').addEventListener('mouseleave', backgroundHandler('background-cubes'));
-  document.getElementById('label1').addEventListener('mouseover', backgroundHandler('background-circuits'));
-  document.getElementById('label2').addEventListener('mouseover', backgroundHandler('background-curves'));
-  document.getElementById('label3').addEventListener('mouseover', backgroundHandler('background-aztec'));
+  document.getElementById('labels')
+    .addEventListener('mouseleave', function(){
+      setTimeout(backgroundHandler('background-cubes'), 500)
+    });
+  document.getElementById('label1').addEventListener('click', backgroundHandler('background-circuits'));
+  document.getElementById('label2').addEventListener('click', backgroundHandler('background-curves'));
+  document.getElementById('label3').addEventListener('click', backgroundHandler('background-aztec'));
+  document.getElementById('label1').addEventListener('touchstart', backgroundHandler('background-circuits'));
+  document.getElementById('label2').addEventListener('touchstart', backgroundHandler('background-curves'));
+  document.getElementById('label3').addEventListener('touchstart', backgroundHandler('background-aztec'));
 };
 
 init();

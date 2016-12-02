@@ -172,6 +172,7 @@ ul {
 }
 
 .square ul {
+  cursor: pointer;
   font-size: 5vmin;
   text-align: center;
   list-style: none;
