@@ -16,7 +16,6 @@ body {
   background-color: #5D737E;
   transition-duration: 0.2s;
   z-index: -1;
-  min-width: 850px;
 }
 
 header {
@@ -65,6 +64,7 @@ h1 {
 
 h1 span { 
   font-size: 10vmin;
+  line-height:  10vmin;
 }
 
 h2 {
@@ -83,7 +83,7 @@ h3 {
 h3 span {
   color: darkgrey;
   font-family: 'Bungee Hairline', sans-serif;
-  font-size:; .9em;
+  font-size: 0.9em;
 }
 
 h3 span:before{
@@ -157,6 +157,7 @@ ul {
   font-family: 'Bungee Hairline', sans-serif;
   font-weight: 600;
   font-size: 4vmin;
+  line-height: 4vmin;
   height: 70vmin;
   padding: 0px;
   width: 70vmin;
@@ -175,6 +176,7 @@ ul {
 .square ul {
   cursor: pointer;
   font-size: 5vmin;
+  line-height: 5vmin;
   text-align: center;
   list-style: none;
   padding: 0px;
@@ -225,6 +227,7 @@ ul {
 .page h1 {
   color: white;
   font-size: 10vmin;
+  line-height: 10vmin;
 }
 
 .page ul {
@@ -306,6 +309,7 @@ ul {
 
 #title {
   font-size: 8vmin;
+  line-height:  8vmin;
   cursor: pointer;
 }
 
