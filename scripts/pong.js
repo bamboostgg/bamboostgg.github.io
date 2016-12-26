@@ -54,11 +54,9 @@ function pong() {
   var body = function() {
     return {
       open:  function() {
-        console.log('cubes')
         document.body.className = "container fullscreen background-cubes";
       },
       close: function() {
-        console.log('no cubes')
         document.body.className = "container fullscreen";
       },
     };
@@ -171,22 +169,26 @@ function pong() {
     };
 
     function update() {
-      var nextX = state.ball.x + state.ball.vx;
-      var nextY = state.ball.y + state.ball.vy;
+      var ball   = state.ball;
+      var bounds = state.bounds;
+      var left   = state.paddleLeft;
+      var right  = state.paddleRight;
+      var nextX  = ball.x + ball.vx;
+      var nextY  = ball.y + ball.vy;
 
       // player paddleMovement [keyboard]
       if (state.controls.currentKey) {
         switch (state.controls.currentKey) {
           case 'ArrowUp':
-            state.paddleRight.y -=
-              state.paddleRight.y - 5 < state.bounds.top ?
-                state.paddleRight.y - state.bounds.top :
+            right.y -=
+              right.y - 5 < bounds.top ?
+                right.y - bounds.top :
                 5;
             break;
           case 'ArrowDown':
-            state.paddleRight.y += 
-              state.paddleRight.y + state.paddleRight.height + 5 > state.bounds.bottom ?
-                state.paddleRight.y + state.paddleRight.height - state.bounds.bottom :
+            right.y += 
+              right.y + right.height + 5 > bounds.bottom ?
+                right.y + right.height - bounds.bottom :
                 5;
             break;
           default:
@@ -197,86 +199,102 @@ function pong() {
       // player paddleMovement [cursor]
       if (state.controls.cursorY && !state.controls.currentKey) {
         var cursorY = state.controls.cursorY;
-        if (cursorY < (state.bounds.top + state.paddleRight.height / 2)) {
-          cursorY = state.bounds.top + state.paddleRight.height / 2;
-        } else if (cursorY > state.bounds.bottom - state.paddleRight.height / 2) {
-          cursorY = state.bounds.bottom - state.paddleRight.height / 2;
+        if (cursorY < (bounds.top + right.height / 2)) {
+          cursorY = bounds.top + right.height / 2;
+        } else if (cursorY > bounds.bottom - right.height / 2) {
+          cursorY = bounds.bottom - right.height / 2;
         }
-        state.paddleRight.y = cursorY - state.paddleRight.height / 2;
+        right.y = cursorY - right.height / 2;
       }
 
 
       // left paddleMovement
-      if ((state.paddleLeft.y + state.paddleLeft.height / 2 - nextY ) > 0) {
-        state.paddleLeft.y -=
-          state.paddleLeft.y - 4 < state.bounds.top ?
-              state.paddleLeft.y - state.bounds.top :
+      if ((left.y + left.height / 2 - nextY ) > 0) {
+        left.y -=
+          left.y - 4 < bounds.top ?
+              left.y - bounds.top :
               4;
       } else {
-        state.paddleLeft.y += 
-          state.paddleLeft.y + state.paddleLeft.height + 4 > state.bounds.bottom ?
-            state.paddleLeft.y + state.paddleLeft.height - state.bounds.bottom :
+        left.y += 
+          left.y + left.height + 4 > bounds.bottom ?
+            left.y + left.height - bounds.bottom :
             4;
       }
 
       // top & bottom barriers
       if (
-        nextY < state.bounds.top ||
-        nextY > state.bounds.bottom - state.ball.height
+        nextY < bounds.top ||
+        nextY > bounds.bottom - ball.height
       ) {
-        state.ball.vy = -state.ball.vy;
+        ball.vy = -ball.vy;
       }
 
       // left bound
-      if (nextX < state.paddleLeft.width) {
+      if (nextX < left.width) {
         // paddle hit
         if (
-          nextY + state.ball.height  > state.paddleLeft.y &&
-          nextY < state.paddleLeft.y + state.paddleLeft.height
+          nextY + ball.height > left.y &&
+          nextY < left.y + left.height
         ) {
-          state.ball.vx = -state.ball.vx
-          state.ball.vx *= 1.025;
-          state.ball.vy *= 1.025;
+          ball.vx = -ball.vx
+          ball.vx *= 1.05;
+          ball.vy = (
+            nextY
+            + ball.height / 2
+            - left.y
+            - left.height / 2
+            ) / 4;
           return;
         }
         // score
+        ball.vy = 3.5;
+        ball.vx = -ball.vx;
         state.score.right += 1;
         if (state.score.right > 2) {
           state.paused = true;
           state.winner = 'You';
           return;
         }
-        state.ball.y = canvas.height / 2 - state.ball.height / 2;
-        state.ball.x = canvas.width  / 2 - state.ball.width  / 2;
+        ball.y = canvas.height / 2 - ball.height / 2;
+        ball.x = canvas.width  / 2 - ball.width  / 2;
         return;
       }
 
       // right bound
-      if (nextX > (canvas.width - state.paddleRight.width - state.ball.width)) {
+      if (nextX > (canvas.width - right.width - ball.width)) {
         // paddle hit
         if (
-          nextY + state.ball.height   > state.paddleRight.y &&
-          nextY < state.paddleRight.y + state.paddleRight.height
+          nextY + ball.height > right.y &&
+          nextY < right.y + right.height
         ) {
-          state.ball.vx = -state.ball.vx;
-          state.ball.vx *= 1.025;
-          state.ball.vy *= 1.025;
+          ball.vx = -ball.vx;
+          ball.vx *= 1.025;
+          ball.vy = (
+            nextY
+            + ball.height / 2
+            - right.y
+            - right.height / 2
+            ) / 4;
+
+          console.log(ball.vy, right.y , nextY)
           return;
         }
         // score
+        ball.vy = 3.5;
+        ball.vx = -ball.vx;
         state.score.left += 1;
         if (state.score.left > 2) {
           state.paused = true;
           state.winner = "Me";
           return;
         }
-        state.ball.y = canvas.height / 2 - state.ball.height / 2;
-        state.ball.x = canvas.width  / 2 - state.ball.width  / 2;
+        ball.y = canvas.height / 2 - ball.height / 2;
+        ball.x = canvas.width  / 2 - ball.width  / 2;
         return;
       }
 
-      state.ball.x += state.ball.vx;
-      state.ball.y += state.ball.vy;
+      ball.x += ball.vx;
+      ball.y += ball.vy;
 
     };
 
@@ -302,58 +320,65 @@ function pong() {
         return;
       }
 
+
+      // shorthand
+      var ball   = state.ball;
+      var bounds = state.bounds;
+      var left   = state.paddleLeft;
+      var right  = state.paddleRight;
+
       // score
       ctx.fillText(
         state.score.left,
         canvas.width / 2 - 60,
-        state.bounds.top - 10
+        bounds.top - 10
       );
       ctx.fillText(
         state.score.right,
         canvas.width / 2 + 36,
-        state.bounds.top - 10
+        bounds.top - 10
       );
       ctx.font = "24px arial";
       ctx.fillText(
-        state.paddleLeft.name,
-        canvas.width / 2 - (6 + state.paddleLeft.name.length * 12) ,
-        state.bounds.top - 58
+        left.name,
+        canvas.width / 2 - (6 + left.name.length * 12) ,
+        bounds.top - 58
       );
       ctx.fillText(
         'You',
         canvas.width / 2 + 30,
-        state.bounds.top - 58
+        bounds.top - 58
       );
 
       // bounds
       ctx.beginPath();
-      ctx.moveTo(0           , state.bounds.top);
-      ctx.lineTo(canvas.width, state.bounds.top);
-      ctx.moveTo(canvas.width, state.bounds.bottom);
-      ctx.lineTo(0           , state.bounds.bottom);
+      ctx.moveTo(0           , bounds.top);
+      ctx.lineTo(canvas.width, bounds.top);
+      ctx.moveTo(canvas.width, bounds.bottom);
+      ctx.lineTo(0           , bounds.bottom);
       ctx.stroke();
 
       // ball
       ctx.fillRect(
-        state.ball.x,
-        state.ball.y,
-        state.ball.width,
-        state.ball.height
+        ball.x,
+        ball.y,
+        ball.width,
+        ball.height
       );
 
       // left paddle
       ctx.fillRect(
         4,
-        state.paddleLeft.y,
-        state.paddleLeft.width,
-        state.paddleLeft.height
+        left.y,
+        left.width,
+        left.height
       );
       // right paddle
       ctx.fillRect(
-        canvas.width - state.paddleRight.width - 4,
-        state.paddleRight.y,
-        state.paddleRight.width,
-        state.paddleRight.height
+        canvas.width - right.width - 4,
+        right.y,
+        right.width,
+        right.height
       );
     };
     
