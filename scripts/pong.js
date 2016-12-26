@@ -276,7 +276,6 @@ function pong() {
             - right.height / 2
             ) / 4;
 
-          console.log(ball.vy, right.y , nextY)
           return;
         }
         // score
