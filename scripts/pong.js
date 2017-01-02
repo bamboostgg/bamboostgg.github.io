@@ -1,16 +1,22 @@
 function pong() {
   var notCalled = true;
   var square = function() {
-    var elem = document.getElementsByClassName('square').item(0)
-    var classes = elem.classList;
+    var elem1 = document.getElementById('outer')
+    var classes1 = elem1.classList;
+    var elem2 = document.getElementById('name')
+    var classes2 = elem2.classList;
     return {
       open: function() {
-        classes.contains('shrink')
-        && classes.remove('shrink');
+        classes1.contains('shrink')
+        && classes1.remove('shrink');
+        classes2.contains('hidden')
+        && classes2.remove('hidden');
       },
       close:  function() {
-        !classes.contains('shrink')
-        && classes.add('shrink');
+        !classes1.contains('shrink')
+        && classes1.add('shrink');
+        !classes2.contains('hidden')
+        && classes2.add('hidden');
       },
     };
   }();
@@ -21,13 +27,13 @@ function pong() {
     elem.open = function() {
       if (!classes.contains('fullscreen')) {
         classes.add('fullscreen');
-        classes.remove('footer');
+        classes.remove('hidden');
       }
     };
     elem.close = function() {
       if (classes.contains('fullscreen')) {
         classes.remove('fullscreen');
-        classes.add('footer');
+        classes.add('hidden');
       }
     };
     
@@ -49,17 +55,6 @@ function pong() {
     };
     
     return elem;
-  }();
-
-  var body = function() {
-    return {
-      open:  function() {
-        document.body.className = "container fullscreen background-cubes";
-      },
-      close: function() {
-        document.body.className = "container fullscreen";
-      },
-    };
   }();
 
 
@@ -451,7 +446,6 @@ function pong() {
   }(canvas);
 
   var closeAll = function() {
-    body.open();
     square.open();
     canvas.close();
     exit.close();
@@ -469,7 +463,6 @@ function pong() {
   }
   var openAll = function() {
 
-    body.close()
     square.close();
     canvas.open();
     exit.open();

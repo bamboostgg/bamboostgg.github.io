@@ -13,8 +13,6 @@
     <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline" rel="stylesheet">
     <link href="styles/styles.css" rel="stylesheet">
     <link href="assets/check-mark.ico" rel="icon" type="img/ico">
-
-    <script async src="https://use.fontawesome.com/1e38503262.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -27,41 +25,25 @@
     <script defer src="scripts/main.js"></script>
   </head>
 
-  <body class="container fullscreen background-cubes">
-    <main class="container content square">
-      <h1 id="title"><span>E</span>dison <span>H</span>uff</h1>
-      <ul id="labels">
-        <li id="label1">JavaScript</li>
-        <li id="label2">BioTechology</li>
-        <li id="label3">Rock Climbing</li>
-      </ul>
-      <section class="row">
-        <a class="container" target="_blank" href="http://www.github.com/edisonhuff">
-          <span>GitHub</span>
-          <div class="fa fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </div>
-        </a>
-        <a class="container" target="_blank" href="http://www.linkedin.com/in/edisonhuff">
-          <span>LinkedIn</span>
-          <div class="fa fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-          </div>
-        </a>
-        <a class="container" href="resume.html">
-          <span>Resumé</span>
-          <div class="fa fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
-          </div>
-        </a>
-      </section>
-    </main>
-    <canvas id="canvas" class="footer"></canvas>
-    <a id="exit" class="hidden fa fa-stack fa-lg">
-      <i class="fa fa-close fa-stack-1x"></i>
+  <body>
+    <div id="graphic" class='fullscreen'>
+      <div id="outer" class="box">
+        <div id="top" class="box"></div>
+        <div id="bottom" class="box"></div>
+      </div>
+    </div>
+    <div id="name">
+      <h1>Edison</h1>
+      <h1>Huff</h1>
+    </div>
+    <aside id="link-container">
+      <a target="_blank" href="http://www.github.com/edisonhuff">Github</a>
+      <a target="_blank" href="http://www.linkedin.com/in/edisonhuff">LinkedIn</a>
+      <a target="_blank" href="resume.html">Resume</a>
+    </aside>
+    <canvas id="canvas" class="hidden"></canvas>
+    <a id="exit" class="hidden">
+      X
     </a>
   </body>
 </html>
