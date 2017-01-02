@@ -205,15 +205,23 @@ function pong() {
 
       // left paddleMovement
       if ((left.y + left.height / 2 - nextY ) > 0) {
+        if((left.y + left.height / 2 - nextY ) < 4) {
+          left.y -= 1;
+        } else {
         left.y -=
           left.y - 4 < bounds.top ?
               left.y - bounds.top :
               4;
+        }
       } else {
+        if((left.y + left.height / 2 - nextY ) > -4) {
+          left.y += 1;
+        } else {
         left.y += 
           left.y + left.height + 4 > bounds.bottom ?
             left.y + left.height - bounds.bottom :
             4;
+        }
       }
 
       // top & bottom barriers
