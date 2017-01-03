@@ -171,6 +171,7 @@ ul {
 #exit:hover {
   border: 1px solid #fff;
   text-decoration: none;
+  background-color: (0, 0, 0, 0.15)
 }
 
 #name {
