@@ -39,6 +39,14 @@ a:hover {
 }
 
 canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%);
+  max-width: 800px;
+  margin: 0px auto;
   z-index: 2;
 }
 
@@ -50,7 +58,11 @@ canvas {
 
 #graphic {
   position: absolute;
-  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 300px;
+  min-width: 300px;
    /* flex fill */
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -63,6 +75,9 @@ canvas {
 
   -webkit-justify-content: space-around;
   justify-content: space-around;
+
+  overflow: show;
+  transition-duration: 0.6s;
 }
 
 #outer {
@@ -70,19 +85,25 @@ canvas {
   cursor: pointer;
   height: 288px;
   width: 288px;
-  margin: -144px -144px;
+  border: 0px solid rgba(255,255,255, 0);
+  /*margin: -144px -144px;*/
 }
 
-#outer:hover {
-  height: 350px;
-  width: 350px;
-  transform: rotate(135deg);
-  background-color: rgba(255, 255, 255, 0.15); 
+#graphic:hover #outer{
+  height: 8px;
+  width: 8px;
+  background-color: rgba(255, 255, 255, 1); 
 }
 
-#outer:hover div{
-  height: 250px;
-  width: 250px;
+#graphic:hover #outer div{
+  transform: rotate(180deg);
+  height: 30px;
+  width: 150px;
+  top: -10px;
+  bottom: -10px;
+  border-top: 0px solid rgba(255,255,255, 0);
+  border-bottom: 0px solid rgba(255,255,255, 0);
+
 }
 
 #top {
@@ -91,14 +112,20 @@ canvas {
   right: 0px;
   border-top: 4px solid #fff;
   border-right: 4px solid #fff;
+  border-bottom: 0px solid rgba(255,255,255, 0);
+  border-left: 0px solid rgba(255,255,255, 0);
+  z-index: -1;
 }
 
 #bottom {
   position: absolute;
   bottom: 0px;
   left: 0px;
+  border-top: 0px solid rgba(255,255,255, 0);
+  border-right: 0px solid rgba(255,255,255, 0);
   border-bottom: 4px solid #fff;
   border-left: 4px solid #fff;
+  z-index: -1;
 }
 
 #name {
@@ -113,26 +140,8 @@ canvas {
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-#link-container {
-  position: absolute;
-  padding: 16px;
-  bottom: 0px;
-  width: 100%;
-  z-index: 2;
-
-  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;      /* TWEENER - IE 10 */
-  display: -webkit-flex;     /* NEW - Chrome */
-  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-  -webkit-align-items: center;
-  align-items: center;
-
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
+  cursor: pointer;
 }
 
 #exit {
@@ -143,28 +152,92 @@ canvas {
 }
 
 .hidden{
-  display: none;
+  opacity: 0;
+  transition-duration: 0.6s;
+  z-index: -10 !important;
 }
 
-.fullscreen {
+#git-link {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  padding: 0px;
+  top: 7%;
+  left: 20%;
+  transform: translate(-50%);
 }
 
-.shrink {
-  height: 0% !important;
-  width: 0% !important;
-  transition-duration: 0.8s;
-  padding: 0;
-  transform: rotate(-360deg) !important;
+#in-link {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%);
 }
 
-.shrink * {
-  height: 0% !important;
-  width: 0% !important;
-  border: 0px solid #fff !important;
+#res-link {
+  position: absolute;
+  top: 7%;
+  left: 80%;
+  transform: translate(-50%);
+}
+
+
+#git-link:hover ~#graphic #outer {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+
+#git-link:hover ~#graphic #outer div {
+  transform: rotate(-135deg);
+  height: 300px;
+  width: 300px;
+  border-color: #FFF;
+  border-radius: 50%;
+}
+
+#in-link:hover ~#graphic #outer {
+  background: rgba(255, 255, 255, 0.15);
+  height: 125px;
+  width: 125px;
+  transition-timing-function: ease-out;
+}
+
+#in-link:hover ~#graphic #outer div {
+  transform: rotate(-180deg);
+  background: rgba(255, 255, 255, 0.15); 
+  height: 125px;
+  width: 125px;
+  border-color: rgba(255,255,255, 0);
+  margin: 93px;
+  transition-timing-function: ease-in-out;
+}
+
+#res-link:hover ~#graphic #outer {
+  width: 135px; 
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(90deg);
+  transition-timing-function: ease-out;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#res-link:hover ~#graphic #outer #top {
+  width: 135px; 
+  background-color: rgba(29,67,80, 0.10);
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(60deg);
+  transition-timing-function: ease-out;
+}
+
+#res-link:hover ~#graphic #outer #bottom {
+  width: 135px;
+  background-color: rgba(164,57,49, 0.10);
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(120deg);
+  transition-timing-function: ease-out;
 }

@@ -1,22 +1,48 @@
 function pong() {
   var notCalled = true;
   var square = function() {
-    var elem1 = document.getElementById('outer')
-    var classes1 = elem1.classList;
-    var elem2 = document.getElementById('name')
-    var classes2 = elem2.classList;
+    var $outer   = document.getElementById('outer'),
+        $graphic = document.getElementById('graphic'),
+        $name    = document.getElementById('name'),
+        $gitLink = document.getElementById('git-link'),
+        $inLink  = document.getElementById('in-link'),
+        $resLink = document.getElementById('res-link');
+
+    var classes1 = $outer.classList,
+        classes2 = $graphic.classList,
+        classes3 = $name.classList,
+        classes4 = $gitLink.classList,
+        classes5 = $inLink.classList,
+        classes6 = $resLink.classList;
+
     return {
       open: function() {
-        classes1.contains('shrink')
-        && classes1.remove('shrink');
+        classes1.contains('hidden')
+        && classes1.remove('hidden');
         classes2.contains('hidden')
         && classes2.remove('hidden');
+        classes3.contains('hidden')
+        && classes3.remove('hidden');
+        classes4.contains('hidden')
+        && classes4.remove('hidden');
+        classes5.contains('hidden')
+        && classes5.remove('hidden');
+        classes6.contains('hidden')
+        && classes6.remove('hidden');
       },
       close:  function() {
-        !classes1.contains('shrink')
-        && classes1.add('shrink');
+        !classes1.contains('hidden')
+        && classes1.add('hidden');
         !classes2.contains('hidden')
         && classes2.add('hidden');
+        !classes3.contains('hidden')
+        && classes3.add('hidden');
+        !classes4.contains('hidden')
+        && classes4.add('hidden');
+        !classes5.contains('hidden')
+        && classes5.add('hidden');
+        !classes6.contains('hidden')
+        && classes6.add('hidden');
       },
     };
   }();
@@ -25,14 +51,12 @@ function pong() {
     var elem = document.getElementById('canvas');
     var classes = elem.classList;
     elem.open = function() {
-      if (!classes.contains('fullscreen')) {
-        classes.add('fullscreen');
+      if (classes.contains('hidden')) {
         classes.remove('hidden');
       }
     };
     elem.close = function() {
-      if (classes.contains('fullscreen')) {
-        classes.remove('fullscreen');
+      if (!classes.contains('hidden')) {
         classes.add('hidden');
       }
     };
@@ -81,14 +105,11 @@ function pong() {
         paused: false,
         paddleLeft: {
           name: [
-            'Angalar',
-            'Pork Bun',
-            'Joyce',
-            'Kerrick',
+            'Mrs.Bump',
             'Mr.Bonk',
-            'A Panini',
+            'Dr.Boop',
             'Paddy',
-          ][(Math.random() * 6) | 0],
+          ][(Math.random() * 4) | 0],
           height: 50,
           width: 10,
           y: null,
@@ -459,15 +480,15 @@ function pong() {
     exit.close();
     game.close();
 
-    document.body.removeEventListener('keypress', openCloseListener);
-    document.body.removeEventListener('keydown', game.keyDownHandler);
-    document.body.removeEventListener('keyup', game.keyUpHandler);
-    document.body.removeEventListener('mousedown', game.mouseDownHandler);
-    document.body.removeEventListener('mousemove', game.mouseMoveHandler);
-    document.body.removeEventListener('mouseup', game.mouseUpHandler);
-    document.body.removeEventListener('touchstart', game.touchStartHandler);
-    document.body.removeEventListener('touchmove', game.touchMoveHandler);
-    document.body.removeEventListener('touchend', game.touchEndHandler);
+    document.removeEventListener('keypress', openCloseListener);
+    document.removeEventListener('keydown', game.keyDownHandler);
+    document.removeEventListener('keyup', game.keyUpHandler);
+    document.removeEventListener('mousedown', game.mouseDownHandler);
+    document.removeEventListener('mousemove', game.mouseMoveHandler);
+    document.removeEventListener('mouseup', game.mouseUpHandler);
+    document.removeEventListener('touchstart', game.touchStartHandler);
+    document.removeEventListener('touchmove', game.touchMoveHandler);
+    document.removeEventListener('touchend', game.touchEndHandler);
   }
   var openAll = function() {
 
@@ -477,15 +498,15 @@ function pong() {
     game.resize();
     game.render();
 
-    document.body.addEventListener('keypress', openCloseListener);
-    document.body.addEventListener('keydown', game.keyDownHandler);
-    document.body.addEventListener('keyup', game.keyUpHandler);
-    document.body.addEventListener('mousedown', game.mouseDownHandler);
-    document.body.addEventListener('mousemove', game.mouseMoveHandler);
-    document.body.addEventListener('mouseup', game.mouseUpHandler);
-    document.body.addEventListener('touchstart', game.touchStartHandler);
-    document.body.addEventListener('touchmove', game.touchMoveHandler);
-    document.body.addEventListener('touchend', game.touchEndHandler);
+    document.addEventListener('keypress', openCloseListener);
+    document.addEventListener('keydown', game.keyDownHandler);
+    document.addEventListener('keyup', game.keyUpHandler);
+    document.addEventListener('mousedown', game.mouseDownHandler);
+    document.addEventListener('mousemove', game.mouseMoveHandler);
+    document.addEventListener('mouseup', game.mouseUpHandler);
+    document.addEventListener('touchstart', game.touchStartHandler);
+    document.addEventListener('touchmove', game.touchMoveHandler);
+    document.addEventListener('touchend', game.touchEndHandler);
 
     setTimeout(game.start, 1000);
   }
@@ -504,8 +525,8 @@ function pong() {
   };
   
   if (notCalled) {
-    document.getElementById('exit').addEventListener('click', closeAll);
-    document.getElementById('exit').addEventListener('touchstart', closeAll);
+    document.getElementById('exit').addEventListener('mouseup', closeAll);
+    document.getElementById('exit').addEventListener('touchend', closeAll);
     window.addEventListener('resize', game.resize);
     notCalled = false;
   }

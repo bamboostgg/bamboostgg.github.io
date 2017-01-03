@@ -4,7 +4,7 @@ function init() {
     'run "pong()" to start a game!'
   );
 
-  document.getElementById('outer').addEventListener('click', pong);
+  document.getElementById('graphic').addEventListener('click', pong);
 };
 
 init();
