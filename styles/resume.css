@@ -1,0 +1,223 @@
+body {
+  min-width: 850px;
+  background-color: #A43931;
+  background-image: -webkit-linear-gradient(top, #1D4350, #A43931);
+  background-image: -moz-linear-gradient(top, #1D4350, #A43931);
+  background-image: -o-linear-gradient(top, #1D4350, #A43931);
+  background-image: linear-gradient(to top left, #1D4350, #A43931);
+}
+
+header {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+}
+
+header ul {
+  padding: 0;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 49px;
+  font-family: 'Bungee Hairline', sans-serif;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Bungee Hairline', sans-serif;
+  margin-top: 0.83em;
+  margin-bottom: 0.41em;
+}
+
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  margin: 0;
+}
+
+h3 span {
+  color: darkgrey;
+  font-family: 'Bungee Hairline', sans-serif;
+  font-size: 0.9em;
+}
+
+h3 span:before{
+  content:" - ";
+}
+
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+p i {
+  margin: 0.25em;
+}
+
+ul {
+  margin: 0;
+  padding-left: 2em;
+}
+
+.container {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.subcontainer {
+  display: flex;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-content: center;
+  align-content: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.content {
+  background-color: rgba(252, 255, 253, 1);
+  box-shadow: 0.35vmin 0.6vmin 3vmin 0.6vmin rgba(0, 30, 50, 0.15);
+}
+
+.row {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  transition-duration: 0.4s;
+  width: 100%;
+}
+
+.page {
+  background-color: white;
+  width: 850px;
+  height: 1100px;
+}
+
+.page ul {
+  font-family: 'Open serif', sans-serif;
+  font-size: 0.98em;
+}
+
+.page a {
+  color: black;
+}
+
+#applications{
+  -webkit-flex: 7 2;
+  flex: 7 2;
+}
+
+#contact {
+  margin-top: 12px;
+  padding: 12px 0px;
+}
+
+#contact ul {
+  flex: 0 0 20px;
+  list-style: none;
+  padding: 0;
+}
+
+#contact a {
+  font-size: 0.85em
+}
+
+#education ul {
+  list-style: none;
+  padding: 0;
+}
+
+#education li {
+  margin-bottom: 12px;
+}
+
+#education p {
+  margin: 0;
+}
+
+#experience {
+  -webkit-flex: 4 3;
+  flex: 4 3;
+}
+
+#exit {
+  font-family: 'Bungee hairline', sans-serif;
+  color: white;
+  z-index: 2;
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  transition-duration: 0.3s;
+}
+
+#exit:hover {
+  border: 1px solid #fff;
+  text-decoration: none;
+}
+
+#name {
+  padding-top: 23px;
+  text-align: center;
+  vertical-align: middle;
+  height: 121px;
+  width: 146px;
+  border: 2px solid #fff;
+}
+
+#sidebar {
+  padding: 16px;
+  color: white !important;
+  -webkit-flex: 0;
+  flex: 0;
+  background: linear-gradient(to bottom, #333, #555);
+}
+
+#resume-body {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+#resume-main {
+  -webkit-flex: 1;
+  flex: 1;
+  padding: 0px 16px;
+}
+
+#resume-main h2 {
+  text-align: center;
+}
+
+@media print {
+  html > .container {
+    -webkit-align-items: none;
+    align-items: none;
+    -webkit-justify-content: none;
+    justify-content: none;
+    -webkit-flex-direction: none;
+    flex-direction: none;
+    display: block;
+    margin: 0px;
+  }
+
+  #exit {
+    display: none;
+  }
+}
