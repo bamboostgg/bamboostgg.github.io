@@ -63,6 +63,7 @@ canvas {
   transform: translate(-50%, -50%);
   min-height: 300px;
   min-width: 300px;
+
    /* flex fill */
   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -76,6 +77,7 @@ canvas {
   -webkit-justify-content: space-around;
   justify-content: space-around;
 
+  cursor: pointer;
   overflow: show;
   transition-duration: 0.6s;
 }
@@ -140,6 +142,13 @@ canvas {
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   cursor: pointer;
 }
