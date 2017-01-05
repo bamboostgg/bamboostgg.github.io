@@ -28,8 +28,9 @@ h1 {
 a {
   padding: 4px;
   border: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
   transition-duration: 0.3s;
 }
 
@@ -207,7 +208,7 @@ canvas {
   background: rgba(255, 255, 255, 0.15);
   height: 125px;
   width: 125px;
-  transition-timing-function: ease-out;
+  transition-timing-function: ease-in-out;
 }
 
 #in-link:hover ~#graphic #outer div {
@@ -216,7 +217,7 @@ canvas {
   width: 125px;
   border-color: rgba(255,255,255, 0);
   margin: 93px;
-  transition-timing-function: ease-in-out;
+  transition-timing-function: ease-out;
 }
 
 #res-link:hover ~#graphic #outer {
