@@ -223,25 +223,24 @@ function pong() {
         right.y = cursorY - right.height / 2;
       }
 
-
       // left paddleMovement
-      if ((left.y + left.height / 2 - nextY ) > 0) {
-        if((left.y + left.height / 2 - nextY ) < 4) {
-          left.y -= 1;
-        } else {
-        left.y -=
-          left.y - 4 < bounds.top ?
-              left.y - bounds.top :
-              4;
+      // up movement
+      if (left.y + left.height/2 - nextY > 0) {
+        if (left.y > bounds.top) {
+          left.y -= (
+            left.y + left.height/2 - nextY < 4 ?
+              left.y + left.height/2 -nextY :
+              4
+          )
         }
+      // down movement
       } else {
-        if((left.y + left.height / 2 - nextY ) > -4) {
-          left.y += 1;
-        } else {
-        left.y += 
-          left.y + left.height + 4 > bounds.bottom ?
-            left.y + left.height - bounds.bottom :
-            4;
+        if (left.y + left.height < bounds.bottom) {
+          left.y += (
+            nextY - (left.y + left.height/2) < 4 ?
+              nextY - (left.y + left.height/2) :
+              4
+          )
         }
       }
 
