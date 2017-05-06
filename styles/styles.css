@@ -163,6 +163,7 @@ canvas {
 }
 
 #background {
+  max-width: none;
   z-index: 0;
 }
 
