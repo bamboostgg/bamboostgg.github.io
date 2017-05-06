@@ -1,10 +1,18 @@
 function liquidBackground() {
   var canvas = document.getElementById('background');
+  var radius = Math.sqrt(
+    Math.pow(canvas.height, 2) +
+    Math.pow(canvas.width, 2)
+  ) / 2;
 
   function resize() { 
-      var ctx = canvas.getContext('2d');
-      canvas.height = ctx.canvas.clientHeight;  
-      canvas.width  = ctx.canvas.clientWidth;
+    var ctx = canvas.getContext('2d');
+    canvas.height = ctx.canvas.clientHeight;  
+    canvas.width  = ctx.canvas.clientWidth;
+    radius = Math.sqrt(
+      Math.pow(canvas.height, 2) +
+      Math.pow(canvas.width, 2)
+    ) / 2;
   }
 
   function toRadians (angle) {
@@ -15,21 +23,15 @@ function liquidBackground() {
     var ctx = canvas.getContext('2d');
 
     var height = canvas.height;
-    var width  = canvas.width
+    var width  = canvas.width;
     var theta  = toRadians(e.gamma);
     var tan = Math.tan(theta);
-    var adj = canvas.width/2;
-    var opp = tan * adj;
 
-    console.log({theta, tan, adj, opp})
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.beginPath();
-    ctx.fillStyle = 'white';
-    ctx.strokeStyle = 'white'; 
-    ctx.moveTo(0    , height/2 + opp);
-    ctx.lineTo(width, height/2 - opp);
-    ctx.stroke();
+    ctx.fillStyle = '#1D4350';
+    ctx.arc(width/2, height/2, radius, theta, theta - Math.PI);
     ctx.fill();
   }
 
