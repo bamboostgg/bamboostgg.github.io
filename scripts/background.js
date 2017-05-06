@@ -31,7 +31,7 @@ function liquidBackground() {
     
     ctx.beginPath();
     ctx.fillStyle = '#1D4350';
-    ctx.arc(width/2, height/2, radius, theta, theta - Math.PI);
+    ctx.arc(width/2, height/2, radius, -theta, -(theta - Math.PI));
     ctx.fill();
   }
 
