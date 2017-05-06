@@ -17,32 +17,21 @@ function pong() {
 
     return {
       open: function() {
-        classes1.contains('hidden')
-        && classes1.remove('hidden');
-        classes2.contains('hidden')
-        && classes2.remove('hidden');
-        classes3.contains('hidden')
-        && classes3.remove('hidden');
-        classes4.contains('hidden')
-        && classes4.remove('hidden');
-        classes5.contains('hidden')
-        && classes5.remove('hidden');
-        classes6.contains('hidden')
-        && classes6.remove('hidden');
+        classes1.contains('hidden') && classes1.remove('hidden');
+        classes2.contains('hidden') && classes2.remove('hidden');
+        classes3.contains('hidden') && classes3.remove('hidden');
+        classes4.contains('hidden') && classes4.remove('hidden');
+        classes5.contains('hidden') && classes5.remove('hidden');
+        classes6.contains('hidden') && classes6.remove('hidden');
       },
       close:  function() {
-        !classes1.contains('hidden')
-        && classes1.add('hidden');
-        !classes2.contains('hidden')
-        && classes2.add('hidden');
-        !classes3.contains('hidden')
-        && classes3.add('hidden');
-        !classes4.contains('hidden')
-        && classes4.add('hidden');
-        !classes5.contains('hidden')
-        && classes5.add('hidden');
-        !classes6.contains('hidden')
-        && classes6.add('hidden');
+        !classes1.contains('hidden') && classes1.add
+        ('hidden');
+        !classes2.contains('hidden') && classes2.add('hidden');
+        !classes3.contains('hidden') && classes3.add('hidden');
+        !classes4.contains('hidden') && classes4.add('hidden');
+        !classes5.contains('hidden') && classes5.add('hidden');
+        !classes6.contains('hidden') && classes6.add('hidden');
       },
     };
   }();
