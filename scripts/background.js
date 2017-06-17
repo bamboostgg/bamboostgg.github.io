@@ -1,6 +1,7 @@
 function liquidBackground() {
   var canvas = document.getElementById('background');
   var radius = setRadius();
+  var alpha;
 
   function setRadius() {
     return Math.sqrt(
@@ -21,24 +22,24 @@ function liquidBackground() {
   }
 
   function animate(e) {
+    if (!alpha) {
+      alpha = e.alpha;
+    }
+
     var ctx = canvas.getContext('2d');
 
     var vUnit = canvas.height / 3;
     var width = canvas.width;
     var theta = toRadians(
       e.gamma * e.beta /90
-      + e.alpha * (1- e.beta / 90)
+      + (alpha - e.alpha) * (1 - e.beta / 90)
     );
     var tan = Math.tan(theta);
     var top = vUnit + vUnit * (e.beta / 90);
 
     ctx.fillStyle = '#1D4350';
-    
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
     ctx.beginPath();
-
     ctx.arc(width/2, top, radius, -theta, -(theta - Math.PI));
     ctx.fill();
 
@@ -52,10 +53,14 @@ function liquidBackground() {
   }
 
   resize();
-  animate({
-    alpha: 0,
-    gamma: 0,
-    beta: 45,
-  })
+
+  if (!window.DeviceOrientationEvent) {
+      animate({
+        alpha: 0,
+        gamma: 0,
+        beta: 45,
+      })
+  }
+
   window.ondeviceorientation = animate;
 }
