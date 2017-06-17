@@ -32,16 +32,28 @@ function liquidBackground() {
     var tan = Math.tan(theta);
     var top = vUnit + vUnit * (e.beta / 90);
 
+    ctx.fillStyle = '#1D4350';
+    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     ctx.beginPath();
-    ctx.fillStyle = '#1D4350';
+
     ctx.arc(width/2, top, radius, -theta, -(theta - Math.PI));
     ctx.fill();
+
+    if (location.search.match('debug=1')) {
+      ctx.font = "16px San Serif";
+      ctx.fillStyle = "#FFF";
+      ctx.fillText('alpha ' + e.alpha , 10, canvas.height - 75);
+      ctx.fillText('beta '  + e.beta  , 10, canvas.height - 50);
+      ctx.fillText('gamma ' + e.gamma , 10, canvas.height - 25);
+    }
   }
 
   resize();
   animate({
+    alpha: 0,
     gamma: 0,
     beta: 45,
   })
