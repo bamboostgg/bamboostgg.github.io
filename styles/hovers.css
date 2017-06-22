@@ -1,0 +1,61 @@
+#git-link:hover ~#graphic #outer {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition-timing-function: ease-in-out;
+}
+
+#git-link:hover ~#graphic #outer div {
+  transform: rotate(-135deg);
+  height: 310px;
+  width: 310px;
+  border-color: #FFF;
+  border-radius: 50%;
+  transition-timing-function: ease-in-out;
+}
+
+#in-link:hover ~#graphic #outer {
+  background: rgba(255, 255, 255, 0.15);
+  height: 125px;
+  width: 125px;
+  transition-timing-function: ease-in-out;
+}
+
+#in-link:hover ~#graphic #outer div {
+  background: rgba(255, 255, 255, 0.15);
+  height: 125px;
+  width: 125px;
+  border-color: rgba(255,255,255, 0);
+  margin: 93px;
+  transition-timing-function: ease-out;
+}
+
+#res-link:hover ~#graphic #outer {
+  width: 125px;
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(90deg);
+  transition-timing-function: ease-out;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#res-link:hover ~#graphic #outer #top {
+  width: 125px;
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(60deg);
+  transition-timing-function: ease-out;
+}
+
+#res-link:hover ~#graphic #outer #bottom {
+  width: 125px;
+  border-top: 4px solid rgba(255, 255, 255, 1);
+  border-left: 0px solid rgba(255, 255, 255, 0);
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  transform: rotate(120deg);
+  transition-timing-function: ease-out;
+}
