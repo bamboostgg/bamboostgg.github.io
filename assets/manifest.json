@@ -1,5 +1,10 @@
 {
- "name": "App",
+ "short_name": "Edison Huff",
+ "name": "Edison Huff | Software Engineer",
+ "display": "standalone",
+ "background_color": "#1D4350",
+ "theme_color": "#1D4350",
+ "start_url": "/?utm_source=homescreen",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -37,5 +42,5 @@
    "type": "image\/png",
    "density": "4.0"
   }
- ]
+ ],
 }

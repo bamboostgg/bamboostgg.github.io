@@ -1,6 +1,11 @@
 function liquidBackground() {
   var canvas = document.getElementById('background');
   var radius = setRadius();
+  var orientation = {
+    alpha: 0,
+    beta:  0,
+    gamma: 0,
+  };
 
   function setRadius() {
     return Math.sqrt(
@@ -20,6 +25,15 @@ function liquidBackground() {
     return angle * (Math.PI / 180);
   }
 
+  function setAngle(e) {
+    if(beta ^ e.beta || gamma ^ e.gamma){
+      alpha = e.alpha;
+      beta = e.beta;
+      gamma = e.gamma;
+      document.requestAnimationFrame(animate.bind(this, e));
+    }
+  }
+
   function animate(e) {
     var ctx = canvas.getContext('2d');
 
@@ -34,6 +48,7 @@ function liquidBackground() {
     ctx.arc(width/2, top, radius, -theta, -(theta - Math.PI));
     ctx.fill();
 
+    // if the query string has debug, paint angle info
     if (location.search.match('debug=1')) {
       ctx.font = "16px San Serif";
       ctx.fillStyle = "#FFF";
@@ -43,15 +58,13 @@ function liquidBackground() {
     }
   }
 
-  resize();
-
-  if (!window.DeviceOrientationEvent) {
-      animate({
-        alpha: 0,
-        gamma: 0,
-        beta: 45,
-      })
-  }
-
+  window.addEventListener('resize', resize);
   window.ondeviceorientation = animate;
+
+  resize();
+  animate({
+    alpha: 0,
+    beta: 45,
+    gamma: 0,
+  });
 }
