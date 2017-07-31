@@ -45,7 +45,6 @@ function liquidBackground() {
     ) {
       return;
     }
-    console.log('animate', e);
     var ctx = canvas.getContext('2d');
 
     var width = canvas.width;
