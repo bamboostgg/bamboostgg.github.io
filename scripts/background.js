@@ -19,6 +19,7 @@ function liquidBackground() {
     canvas.height = ctx.canvas.clientHeight;  
     canvas.width  = ctx.canvas.clientWidth;
     radius = setRadius()
+    animate(orientation);
   }
 
   function toRadians (angle) {
@@ -26,15 +27,25 @@ function liquidBackground() {
   }
 
   function setAngle(e) {
-    if(beta ^ e.beta || gamma ^ e.gamma){
-      alpha = e.alpha;
-      beta = e.beta;
-      gamma = e.gamma;
+    var beta  = orientation.beta
+    var gamma = orientation.alpha
+    if(beta !== e.beta || gamma !== e.gamma){
+      orientation.alpha = e.alpha;
+      orientation.beta  = e.beta;
+      orientation.gamma = e.gamma;
       document.requestAnimationFrame(animate.bind(this, e));
     }
   }
 
   function animate(e) {
+    if (
+      e.alpha === null ||
+      e.beta  === null ||
+      e.gamma === null
+    ) {
+      return;
+    }
+    console.log('animate', e);
     var ctx = canvas.getContext('2d');
 
     var width = canvas.width;
