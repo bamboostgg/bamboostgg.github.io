@@ -3,7 +3,6 @@
     '   ____             __ \r\n  \/ __\/ ___ _  ___ \/ \/_ ___   ____\r\n \/ _\/  \/ _ `\/ (_-<\/ __\/\/ -_) \/ __\/\r\n\/___\/__\\_,_\/ \/___\/\\__\/ \\__\/ \/_\/   \r\n  \/ __\/  ___ _  ___ _  \/ \/        \r\n \/ _\/   \/ _ `\/ \/ _ `\/ \/_\/         \r\n\/___\/   \\_, \/  \\_, \/ (_)          \r\n       \/___\/  \/___\/               \n',
     'run "pong()" to start a game!'
   );
-
   liquidBackground();
-  document.getElementById('graphic').addEventListener('click', function() { pong() });
+  document.getElementById('graphic').addEventListener('click', function(e) { pong(e) });
 })()
